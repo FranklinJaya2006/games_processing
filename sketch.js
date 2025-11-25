@@ -14,7 +14,7 @@ let racketBounceRate = 20;
 
 let ballSpeedHorizon = 10;
 let wallSpeed = 5;
-let wallInterval = 2500;
+let wallInterval = 10000;
 let lastAddTime = 0;
 let minGapHeight = 200;
 let maxGapHeight = 300;
