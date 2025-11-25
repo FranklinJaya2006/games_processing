@@ -14,7 +14,7 @@ let racketBounceRate = 20;
 
 let ballSpeedHorizon = 10;
 let wallSpeed = 5;
-let wallInterval = 10000;
+let wallInterval = 4000; // Jarak waktu antar wall dalam milidetik
 let lastAddTime = 0;
 let minGapHeight = 200;
 let maxGapHeight = 300;
@@ -29,16 +29,15 @@ let scoreVal = 0;
 let wallRadius = 15;
 let walls = [];
 
-// Array warna untuk wall
 let wallColorOptions = [
-  [255, 0, 0],      // Merah
-  [0, 150, 255],    // Biru
-  [255, 165, 0],    // Oranye
-  [147, 51, 234],   // Ungu
-  [34, 197, 94],    // Hijau
-  [236, 72, 153],   // Pink
-  [251, 191, 36],   // Kuning
-  [20, 184, 166]    // Teal
+  [255, 0, 0],
+  [0, 150, 255],
+  [255, 165, 0],
+  [147, 51, 234],
+  [34, 197, 94],
+  [236, 72, 153],
+  [251, 191, 36],
+  [20, 184, 166]
 ];
 
 function setup() {
@@ -168,15 +167,11 @@ function applyHorizontalSpeed() {
 }
 
 function wallAdder() {
-  if (millis() - lastAddTime > minWallInterval) {
+  if (millis() - lastAddTime > wallInterval) {
     let gapHeight = int(random(minGapHeight, maxGapHeight));
     let gapY = int(random(0, height - gapHeight));
     
-    // Pilih warna random dari array
     let randomColor = random(wallColorOptions);
-    
-    // Tentukan jarak ke wall berikutnya secara random
-    let nextInterval = random(minWallInterval, maxWallInterval);
 
     walls.push({
       x: width,
@@ -184,8 +179,7 @@ function wallAdder() {
       w: wallWidth,
       h: gapHeight,
       scored: false,
-      color: randomColor,
-      nextInterval: nextInterval
+      color: randomColor
     });
 
     lastAddTime = millis();
